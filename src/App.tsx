@@ -175,10 +175,8 @@ export default function App() {
       <HeaderBar
         report={report}
         onNewReport={handleNewReport}
-        onLoadSample={handleLoadSample}
         onOpenExportModal={() => setIsExportModalOpen(true)}
         onOpenSavedModal={() => setIsSavedModalOpen(true)}
-        onOpenInstallModal={() => setIsInstallModalOpen(true)}
         savedReportsCount={savedReports.length}
       />
 
