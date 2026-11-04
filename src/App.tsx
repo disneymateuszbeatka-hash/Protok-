@@ -373,7 +373,7 @@ export default function App() {
             </div>
 
             {/* Dane Koordynatora */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-700/60">
+            <div className="pt-2 border-t border-slate-700/60">
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1">
                   Imię i nazwisko koordynatora
@@ -383,20 +383,7 @@ export default function App() {
                   value={report.inspectorName || ''}
                   onChange={(e) => setReport((prev) => ({ ...prev, inspectorName: e.target.value }))}
                   placeholder=""
-                  className="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  E-mail do wysyłki raportu PDF
-                </label>
-                <input
-                  type="email"
-                  value={report.recipientEmail || ''}
-                  onChange={(e) => setReport((prev) => ({ ...prev, recipientEmail: e.target.value }))}
-                  placeholder=""
-                  className="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 font-mono"
+                  className="w-full sm:max-w-md bg-slate-900/90 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100"
                 />
               </div>
             </div>
