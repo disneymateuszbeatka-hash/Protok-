@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   Send,
+  Share2,
 } from 'lucide-react';
 
 interface HeaderBarProps {
@@ -53,10 +54,10 @@ export function HeaderBar({
             <button
               type="button"
               onClick={onOpenExportModal}
-              className="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-amber-500/20 active:scale-95"
+              className="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-amber-500/20 active:scale-95 cursor-pointer"
             >
-              <Send className="w-3.5 h-3.5" />
-              PDF &amp; E-mail
+              <Share2 className="w-3.5 h-3.5" />
+              PDF &amp; Udostępnij
             </button>
           </div>
         </div>
@@ -108,8 +109,8 @@ export function HeaderBar({
             onClick={onOpenExportModal}
             className="hidden sm:flex px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs items-center gap-1.5 shadow-md shadow-amber-500/20 active:scale-95 transition-all cursor-pointer"
           >
-            <Send className="w-3.5 h-3.5" />
-            Generuj PDF &amp; E-mail
+            <Share2 className="w-3.5 h-3.5" />
+            Generuj &amp; Udostępnij PDF
           </button>
         </div>
       </div>

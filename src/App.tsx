@@ -21,7 +21,6 @@ import { ChecklistSection } from './components/ChecklistSection';
 import { ExportEmailModal } from './components/ExportEmailModal';
 import { SavedReportsModal } from './components/SavedReportsModal';
 import { PrintableReportDocument } from './components/PrintableReportDocument';
-import { AndroidInstallModal } from './components/AndroidInstallModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
 
 import {
@@ -37,7 +36,6 @@ import {
   Send,
   MessageSquare,
   ShieldCheck,
-  Smartphone,
 } from 'lucide-react';
 
 export default function App() {
@@ -47,7 +45,6 @@ export default function App() {
   const [showPdfPreview, setShowPdfPreview] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isSavedModalOpen, setIsSavedModalOpen] = useState(false);
-  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
   const [savedReports, setSavedReports] = useState<InspectionReport[]>(() => getSavedReports());
 
   const printableDocRef = useRef<HTMLDivElement | null>(null);
@@ -482,25 +479,14 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Install Android Button in Bottom Bar */}
-            <button
-              type="button"
-              onClick={() => setIsInstallModalOpen(true)}
-              className="py-2.5 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-emerald-300 border border-emerald-500/40 font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm"
-              title="Instaluj aplikację na Androidzie (APK / PWA)"
-            >
-              <Smartphone className="w-4 h-4 text-emerald-400" />
-              <span className="hidden sm:inline">Pobierz APK</span>
-            </button>
-
-            {/* Primary Android Action Button */}
+            {/* Primary Action Button */}
             <button
               type="button"
               onClick={() => setIsExportModalOpen(true)}
-              className="flex-1 sm:flex-initial py-2.5 px-5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 active:scale-95 transition-all"
+              className="flex-1 sm:flex-initial py-2.5 px-5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer"
             >
               <Send className="w-4 h-4" />
-              <span>Generuj PDF & Wyślij na E-mail</span>
+              <span>Generuj PDF &amp; Udostępnij</span>
             </button>
           </div>
         </div>
@@ -511,20 +497,13 @@ export default function App() {
         </div>
       </div>
 
-      {/* Android APK / WebAPK Installation Modal */}
-      <AndroidInstallModal
-        isOpen={isInstallModalOpen}
-        onClose={() => setIsInstallModalOpen(false)}
-      />
-
-      {/* Export / Send Email Modal */}
+      {/* Export / Share Modal */}
       <ExportEmailModal
         isOpen={isExportModalOpen}
         onClose={() => setIsExportModalOpen(false)}
         report={report}
         getPage1Element={getPage1Element}
         getPage2Element={getPage2Element}
-        onUpdateRecipientEmail={(email) => setReport((prev) => ({ ...prev, recipientEmail: email }))}
       />
 
       {/* Saved Reports History Modal */}

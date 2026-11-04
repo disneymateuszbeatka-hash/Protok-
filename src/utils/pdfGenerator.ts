@@ -149,9 +149,14 @@ export function downloadPdfBlob(blob: Blob, filename: string): void {
 
 /**
  * Uses Web Share API (Android Native Share sheet) to directly share PDF file to Gmail, WhatsApp, Drive, etc.
- * Returns true if shared successfully, false if not supported or user cancelled.
+ * Returns 'shared' if successful, 'canceled' if user dismissed the sheet, or 'unsupported' if not supported.
  */
-export async function sharePdfFile(blob: Blob, filename: string, title: string, text: string): Promise<boolean> {
+export async function sharePdfFile(
+  blob: Blob,
+  filename: string,
+  title: string,
+  text: string
+): Promise<'shared' | 'canceled' | 'unsupported'> {
   if (typeof navigator !== 'undefined' && navigator.canShare) {
     try {
       const file = new File([blob], filename, { type: 'application/pdf' });
@@ -161,32 +166,33 @@ export async function sharePdfFile(blob: Blob, filename: string, title: string, 
           title,
           text,
         });
-        return true;
+        return 'shared';
       }
     } catch (err: any) {
-      if (err.name === 'AbortError') {
-        return false; // User cancelled share dialog
+      if (err?.name === 'AbortError') {
+        return 'canceled';
       }
-      console.warn('Native file share failed, falling back:', err);
+      console.warn('Native file share failed:', err);
     }
   }
 
-  // Fallback: try sharing title & text
+  // Fallback: try sharing title & text if text sharing is supported
   if (typeof navigator !== 'undefined' && navigator.share) {
     try {
       await navigator.share({
         title,
         text,
       });
-      return true;
+      return 'shared';
     } catch (err: any) {
-      if (err.name !== 'AbortError') {
-        console.warn('Native text share failed:', err);
+      if (err?.name === 'AbortError') {
+        return 'canceled';
       }
+      console.warn('Native text share failed:', err);
     }
   }
 
-  return false;
+  return 'unsupported';
 }
 
 /**
