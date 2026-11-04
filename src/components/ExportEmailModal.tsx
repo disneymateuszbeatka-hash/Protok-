@@ -218,8 +218,7 @@ export function ExportEmailModal({
         </div>
 
         {/* Modal Footer */}
-        <div className="flex items-center justify-between px-5 py-3 border-t border-slate-800 bg-slate-900/90 text-xs text-slate-400">
-          <span>Protokół zgodny z normami PN-B i Ustawą Deweloperską</span>
+        <div className="flex items-center justify-end px-5 py-3 border-t border-slate-800 bg-slate-900/90 text-xs">
           <button
             type="button"
             onClick={onClose}
